@@ -1,14 +1,14 @@
 package com.eshore.account.email;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import javax.mail.Message;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;
@@ -17,7 +17,7 @@ import com.icegreen.greenmail.util.ServerSetup;
 public class AccountEmailServiceTest {
 	private GreenMail greenMail;
 	
-	@Before
+	@BeforeClass
 	public void startMailServer(){
 		greenMail=new GreenMail(ServerSetup.SMTP);
 		greenMail.setUser("test@eshore.com", "123456");
@@ -41,7 +41,7 @@ public class AccountEmailServiceTest {
 		assertEquals(htmlText,GreenMailUtil.getBody(msgs[0]).trim());
 	}
 	
-	@After
+	@AfterClass
 	public void stopMailServer(){
 		greenMail.stop();
 	}
