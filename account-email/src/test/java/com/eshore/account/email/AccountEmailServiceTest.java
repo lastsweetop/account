@@ -12,14 +12,14 @@ import org.testng.annotations.Test;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;
-import com.icegreen.greenmail.util.ServerSetup;
+import com.icegreen.greenmail.util.ServerSetupTest;
 
 public class AccountEmailServiceTest {
 	private GreenMail greenMail;
 	
 	@BeforeClass
 	public void startMailServer(){
-		greenMail=new GreenMail(ServerSetup.SMTP);
+		greenMail=new GreenMail(ServerSetupTest.SMTP);
 		greenMail.setUser("test@eshore.com", "123456");
 		greenMail.start();
 	}
