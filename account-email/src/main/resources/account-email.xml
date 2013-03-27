@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd ">
-   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
-	   	<property name="location" value="classpath:email.properties"></property>
-   </bean>
-   <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="location" value="classpath:account-service.properties"></property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="protocol" value="${email.protocol}" />
 		<property name="host" value="${email.host}" />
 		<property name="port" value="${email.port}" />
@@ -16,11 +18,11 @@
 			<props>
 				<prop key="mail.${email.protocol}.auth">${email.auth}</prop>
 			</props>
-		</property>  
-   </bean>
-   <bean id="accountEmailService" class="com.eshore.account.email.AccountEmailServiceImpl">
-   		<property name="javaMailSender" ref="javaMailSender"></property>
-   		<property name="systemEmail" value="${email.systemEmail}"></property>
-   </bean>
+		</property>
+	</bean>
+	<bean id="accountEmailService" class="com.eshore.account.email.AccountEmailServiceImpl">
+		<property name="javaMailSender" ref="javaMailSender"></property>
+		<property name="systemEmail" value="${email.systemEmail}"></property>
+	</bean>
 
 </beans>
