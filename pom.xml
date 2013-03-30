@@ -151,12 +151,12 @@
 		<repository>
 			<id>account</id>
 			<name>account Releases Repository</name>
-			<url>http://192.168.115.5:8080/nexus/content/repositories/account/</url>
+			<url>http://113.108.186.149:8080/nexus/content/repositories/account/</url>
 		</repository>
 		<snapshotRepository>
 			<id>account-snapshots</id>
 			<name>account Snapshot Repository</name>
-			<url>http://192.168.115.5:8080/nexus/content/repositories/account-snapshots/</url>
+			<url>http://113.108.186.149:8080/nexus/content/repositories/account-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>

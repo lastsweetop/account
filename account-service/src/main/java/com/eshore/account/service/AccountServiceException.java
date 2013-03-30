@@ -1,6 +1,5 @@
 package com.eshore.account.service;
 
-import com.eshore.account.captcha.AccountCaptchaException;
 
 public class AccountServiceException extends Exception {
 
