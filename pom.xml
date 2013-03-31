@@ -83,8 +83,8 @@
 	</dependencyManagement>
 
     <scm>
-    	<connection>scm:git:ssh://git@github.com:lastsweetop/account.git</connection>
-    	<developerConnection>scm:git:ssh://git@github.com:lastsweetop/account.git</developerConnection>
+    	<connection>scm:git:git@github.com:lastsweetop/account.git</connection>
+    	<developerConnection>scm:git:git@github.com:lastsweetop/account.git</developerConnection>
     	<url>https://github.com/lastsweetop/account</url>
     </scm>
 
@@ -95,7 +95,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.4.1</version>
 				<configuration>
-					<tagBase>ssh://git@github.com:lastsweetop/account.git/tags</tagBase>
+					<tagBase>git@github.com:lastsweetop/account.git/tags/</tagBase>
 				</configuration>
 			</plugin>
 		</plugins>
