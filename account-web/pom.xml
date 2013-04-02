@@ -41,6 +41,27 @@
 				<artifactId>cargo-maven2-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources/</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>test</id>
+			<properties>
+				<email.username>11111@189.cn</email.username>
+				<email.password>11111</email.password>
+			</properties>
+		</profile>
+		<profile>
+			<id>product</id>
+			<properties>
+				<email.username>22222@163.com</email.username>
+				<email.password>22222</email.password>
+			</properties>
+		</profile>
+	</profiles>
 </project>

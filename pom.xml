@@ -10,6 +10,12 @@
 	<name>account-parent</name>
 	<url>http://maven.apache.org</url>
 
+    <scm>
+    	<connection>scm:git:git@github.com:lastsweetop/account.git</connection>
+    	<developerConnection>scm:git:git@github.com:lastsweetop/account.git</developerConnection>
+    	<url>https://github.com/lastsweetop/account</url>
+    </scm>
+
 	<properties>
 		<junit.version>4.7</junit.version>
 		<springframework.version>2.5.6</springframework.version>
@@ -82,11 +88,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-    <scm>
-    	<connection>scm:git:git@github.com:lastsweetop/account.git</connection>
-    	<developerConnection>scm:git:git@github.com:lastsweetop/account.git</developerConnection>
-    	<url>https://github.com/lastsweetop/account</url>
-    </scm>
 
 	<build>
 		<plugins>
@@ -101,6 +102,11 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
@@ -163,16 +169,36 @@
 		</pluginManagement>
 	</build>
 
+
+	<profiles>
+		<profile>
+			<id>inner</id>
+			<properties>
+				<distribution.repository>192.168.115.5</distribution.repository>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>outer</id>
+			<properties>
+				<distribution.repository>113.108.186.149</distribution.repository>
+			</properties>
+		</profile>
+	</profiles>
+	
+
 	<distributionManagement>
 		<repository>
 			<id>account</id>
 			<name>account Releases Repository</name>
-			<url>http://113.108.186.149:8080/nexus/content/repositories/account/</url>
+			<url>http://${distribution.repository}:8080/nexus/content/repositories/account/</url>
 		</repository>
 		<snapshotRepository>
 			<id>account-snapshots</id>
 			<name>account Snapshot Repository</name>
-			<url>http://113.108.186.149:8080/nexus/content/repositories/account-snapshots/</url>
+			<url>http://${distribution.repository}:8080/nexus/content/repositories/account-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
