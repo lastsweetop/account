@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>account-web</artifactId>
 	<packaging>war</packaging>
-	<name>account-web Maven Webapp</name>
+	<name>account-web</name>
 
 	<dependencies>
 		<dependency>
@@ -52,15 +52,15 @@
 		<profile>
 			<id>test</id>
 			<properties>
-				<email.username>11111@189.cn</email.username>
-				<email.password>11111</email.password>
+				<email.username1>11111@189.cn</email.username1>
+				<email.password1>11111</email.password1>
 			</properties>
 		</profile>
 		<profile>
 			<id>product</id>
 			<properties>
-				<email.username>22222@163.com</email.username>
-				<email.password>22222</email.password>
+				<email.username1>22222@163.com</email.username1>
+				<email.password1>22222</email.password1>
 			</properties>
 		</profile>
 	</profiles>

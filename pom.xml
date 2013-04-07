@@ -15,6 +15,32 @@
     	<developerConnection>scm:git:git@github.com:lastsweetop/account.git</developerConnection>
     	<url>https://github.com/lastsweetop/account</url>
     </scm>
+    
+    <ciManagement>
+    	<system>Hudson</system>
+    	<url>http://${distribution.repository}:8080/hudson</url>
+    </ciManagement>
+    
+    <developers>
+    	<developer>
+    		<id>sweetop</id>
+    		<name>sweetop</name>
+    		<email>sweetop@189.cn</email>
+    		<timezone>8</timezone>
+    	</developer>
+    </developers>
+    
+    <licenses>
+    	<license>
+    		<name>Apache License,Version 2.0</name>
+    		<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    	</license>
+    </licenses>
+
+	<issueManagement>
+		<system>urltracker</system>
+		<url>http://10.18.96.90/URTracker/Accounts/Login.aspx</url>
+	</issueManagement>
 
 	<properties>
 		<junit.version>4.7</junit.version>
@@ -121,6 +147,7 @@
 						</execution>
 					</executions>
 				</plugin>
+<!-- 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -130,7 +157,8 @@
 						<target>1.5</target>
 					</configuration>
 				</plugin>
-				<plugin>
+	 -->
+	 			<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.13</version>
