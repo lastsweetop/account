@@ -15,8 +15,8 @@ import com.eshore.account.service.AccountServiceException;
 import com.eshore.account.service.SignUpRequest;
 
 public class SignUpServlet extends HttpServlet {
-	private static final long serialVersionUID = 2921410310569743632L;
-	private ApplicationContext context;
+	private static final long	serialVersionUID	= 2921410310569743632L;
+	private ApplicationContext	context;
 
 	@Override
 	public void init() throws ServletException {
@@ -57,8 +57,7 @@ public class SignUpServlet extends HttpServlet {
 		request.setCaptchaKey(captchaKey);
 		request.setCaptchaValue(captchaValue);
 
-		request.setActivateServiceUrl(req.getContextPath()
-				+ "/activate");
+		request.setActivateServiceUrl(req.getContextPath() + "/activate");
 		try {
 			service.signUp(request);
 			resp.getWriter()
