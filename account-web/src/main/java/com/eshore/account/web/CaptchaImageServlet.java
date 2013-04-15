@@ -14,31 +14,40 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.eshore.account.service.AccountService;
 import com.eshore.account.service.AccountServiceException;
 
+/**
+ * ClassName: CaptchaImageServlet <br/>
+ * Function: TODO ADD FUNCTION. <br/>
+ * Reason: TODO ADD REASON(可选). <br/>
+ * date: 2013-4-11 上午8:49:57 <br/>
+ *
+ * @author wudongdong
+ * @version
+ * @since JDK 1.6
+ */
 public class CaptchaImageServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4530680422741595106L;
-	
-	private ApplicationContext context;
-	
+	private static final long	serialVersionUID	= 4530680422741595106L;
+
+	private ApplicationContext	context;
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		context=WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		context = WebApplicationContextUtils
+				.getWebApplicationContext(getServletContext());
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String key=req.getParameter("key");
-		if(key==null || key.length()==0){
+		String key = req.getParameter("key");
+		if (key == null || key.length() == 0) {
 			resp.sendError(400, "No Captcha Key Found");
-		}else{
+		} else {
 			try {
-				AccountService service=(AccountService)context.getBean("accountService");
-				OutputStream out=resp.getOutputStream();
+				AccountService service = (AccountService) context
+						.getBean("accountService");
+				OutputStream out = resp.getOutputStream();
 				out.write(service.generateCaptchaImage(key));
 				out.close();
 			} catch (AccountServiceException e) {
