@@ -6,37 +6,43 @@
 	<artifactId>account-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	
 	<name>account-parent</name>
-	<url>http://maven.apache.org</url>
+	<url>http://192.168.115.5:8080/account</url>
+	<description>account parent</description>
 
-    <scm>
-    	<connection>scm:git:git@github.com:lastsweetop/account.git</connection>
-    	<developerConnection>scm:git:git@github.com:lastsweetop/account.git</developerConnection>
-    	<url>https://github.com/lastsweetop/account</url>
-    </scm>
-    
-    <ciManagement>
-    	<system>Hudson</system>
-    	<url>http://${distribution.repository}:8080/hudson</url>
-    </ciManagement>
-    
-    <developers>
-    	<developer>
-    		<id>sweetop</id>
-    		<name>sweetop</name>
-    		<email>sweetop@189.cn</email>
-    		<timezone>8</timezone>
-    	</developer>
-    </developers>
-    
-    <licenses>
-    	<license>
-    		<name>Apache License,Version 2.0</name>
-    		<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-    	</license>
-    </licenses>
+	<!-- 版本控制 -->
+	<scm>
+		<connection>scm:git:git@github.com:lastsweetop/account.git</connection>
+		<developerConnection>scm:git:git@github.com:lastsweetop/account.git</developerConnection>
+		<url>https://github.com/lastsweetop/account/blob/master</url>
+	</scm>
 
+	<!-- 持续集成 -->
+	<ciManagement>
+		<system>Hudson</system>
+		<url>http://${distribution.repository}:8080/hudson</url>
+	</ciManagement>
+
+	<!-- 项目团队 -->
+	<developers>
+		<developer>
+			<id>sweetop</id>
+			<name>sweetop</name>
+			<email>sweetop@189.cn</email>
+			<timezone>8</timezone>
+		</developer>
+	</developers>
+
+	<!-- 项目授权 -->
+	<licenses>
+		<license>
+			<name>Apache License,Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+	<!-- 问题跟踪 -->
 	<issueManagement>
 		<system>urltracker</system>
 		<url>http://10.18.96.90/URTracker/Accounts/Login.aspx</url>
@@ -50,6 +56,7 @@
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<testng.version>6.8</testng.version>
 	</properties>
+
 	<modules>
 		<module>account-email</module>
 		<module>account-persist</module>
@@ -125,14 +132,93 @@
 					<tagBase>git@github.com:lastsweetop/account.git/tags/</tagBase>
 				</configuration>
 			</plugin>
+			<plugin>
+				<!-- 站点生成插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<!-- 支持国际化 -->
+					<locales>zh_CN</locales>
+					<reportPlugins>
+						<plugin>
+							<!-- 生成javadoc文件 -->
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.9</version>
+						</plugin>
+						<plugin>
+							<!-- 项目信息过滤 -->
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.6</version>
+							<reportSets>
+								<reportSet>
+									<reports>
+										<!-- index一定要生成,否则链接问题 -->
+										<report>index</report>
+										<report>dependencies</report>
+										<report>project-team</report>
+										<report>issue-tracking</report>
+										<report>license</report>
+										<report>scm</report>
+										<report>cim</report>
+										<report>modules</report>
+										<report>plugins</report>
+										<report>help</report>
+										<report>summary</report>
+									</reports>
+								</reportSet>
+							</reportSets>
+						</plugin>
+						<plugin>
+							<!-- 源码查看生成 -->
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-jxr-plugin</artifactId>
+							<version>2.3</version>
+							<configuration>
+								<!-- 多模块聚合 -->
+								<aggregate>true</aggregate>
+							</configuration>
+						</plugin>
+						<plugin>
+							<!-- 代码风格检查 -->
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-checkstyle-plugin</artifactId>
+							<version>2.10</version>
+							<configuration>
+							    <!-- 使用maven社区代码风格 -->
+								<configLocation>config/maven_checks.xml</configLocation>
+							</configuration>
+						</plugin>
+						<plugin>
+							<!-- 代码更改日志 -->
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-changelog-plugin</artifactId>
+							<version>2.2</version>
+						</plugin>
+						<plugin>
+							<!-- 代码隐藏bug检查 -->
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-pmd-plugin</artifactId>
+							<version>3.0</version>
+							<configuration>
+								<!-- 多模块聚合 -->
+								<aggregate>true</aggregate>
+							</configuration>
+						</plugin>
+						<plugin>
+						    <!-- 测试覆盖率 -->
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>cobertura-maven-plugin</artifactId>
+							<version>2.5.2</version>
+						</plugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.2</version>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
@@ -147,18 +233,10 @@
 						</execution>
 					</executions>
 				</plugin>
-<!-- 
+				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> 
+					<version>2.1</version> <configuration> <source>1.5</source> <target>1.5</target> 
+					</configuration> </plugin> -->
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-						<source>1.5</source>
-						<target>1.5</target>
-					</configuration>
-				</plugin>
-	 -->
-	 			<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.13</version>
@@ -187,8 +265,8 @@
 							<type>runtime</type>
 							<properties>
 								<cargo.remote.username>tomcat</cargo.remote.username>
-								<cargo.remote.password>tomcat</cargo.remote.password>
-								<cargo.remote.manager.url>http://113.108.186.149:8080/manager/html</cargo.remote.manager.url>
+								<cargo.remote.password>123456</cargo.remote.password>
+								<cargo.remote.manager.url>http://111.222.222.111:8080/manager/html</cargo.remote.manager.url>
 							</properties>
 						</configuration>
 					</configuration>
@@ -211,12 +289,11 @@
 		<profile>
 			<id>outer</id>
 			<properties>
-				<distribution.repository>113.108.186.149</distribution.repository>
+				<distribution.repository>111.222.222.111</distribution.repository>
 			</properties>
 		</profile>
 	</profiles>
 	
-
 	<distributionManagement>
 		<repository>
 			<id>account</id>
@@ -228,5 +305,9 @@
 			<name>account Snapshot Repository</name>
 			<url>http://${distribution.repository}:8080/nexus/content/repositories/account-snapshots/</url>
 		</snapshotRepository>
+		<site>
+			<id>website</id>
+			<url>file:///Users/apple/site/</url>
+		</site>
 	</distributionManagement>
 </project>
