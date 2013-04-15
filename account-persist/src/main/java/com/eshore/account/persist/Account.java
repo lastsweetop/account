@@ -7,6 +7,12 @@ public class Account {
 	private String password;
 	private boolean activated;
 
+	/**
+	 * getId:(这里用一句话描述这个方法的作用). <br/>
+	 * @author wudongdong
+	 * @return id String
+	 * @since JDK 1.6
+	 */
 	public String getId() {
 		return id;
 	}
@@ -35,16 +41,33 @@ public class Account {
 		return password;
 	}
 
+	/**
+	 * setPassword:(这里用一句话描述这个方法的作用). <br/>
+	 * @author wudongdong
+	 * @param password
+	 * @since JDK 1.6
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public boolean isActivated() {
+	/**
+	 * isActivated:(这里用一句话描述这个方法的作用). <br/>
+	 * @author wudongdong
+	 * @return boolean
+	 */
+	public final boolean isActivated() {
 		return activated;
 	}
 
-	public void setActivated(boolean activated) {
-		this.activated = activated;
+	/**
+	 * setActivated:(这里用一句话描述这个方法的作用). <br/>
+	 * @author wudongdong
+	 * @param newActivated boolean
+	 * @since JDK 1.6
+	 */
+	public final void setActivated(final boolean newActivated) {
+		this.activated = newActivated;
 	}
 
 }
