@@ -17,10 +17,10 @@ import com.google.code.kaptcha.util.Config;
 
 public class AccountCaptchaServiceImpl implements AccountCaptchaService,
 		InitializingBean {
-	private DefaultKaptcha producer;
-	private Map<String, String> captchaMap = new HashMap<String, String>();
-	private List<String> preDefinedTexts;
-	private int textCount = 0;
+	private DefaultKaptcha		producer;
+	private final Map<String, String>	captchaMap	= new HashMap<String, String>();
+	private List<String>		preDefinedTexts;
+	private int					textCount	= 0;
 
 	public void afterPropertiesSet() throws Exception {
 		producer = new DefaultKaptcha();
@@ -28,61 +28,63 @@ public class AccountCaptchaServiceImpl implements AccountCaptchaService,
 	}
 
 	public String generateCaptchaKey() throws AccountCaptchaException {
-		String key=RandomGenerator.getRandomString();
-		String value=getCaptchaText();
+		String key = RandomGenerator.getRandomString();
+		String value = getCaptchaText();
 		captchaMap.put(key, value);
 		return key;
 	}
 
 	public byte[] generateCaptchaImage(String captchaKey)
 			throws AccountCaptchaException {
-		String text=captchaMap.get(captchaKey);
-		if(text==null){
-			throw new AccountCaptchaException("Captcha key '"+captchaKey+"' not found");
+		String text = captchaMap.get(captchaKey);
+		if (text == null) {
+			throw new AccountCaptchaException("Captcha key '" + captchaKey
+					+ "' not found");
 		}
-		BufferedImage image=producer.createImage(text);
-		ByteArrayOutputStream out=new ByteArrayOutputStream();
-		
+		BufferedImage image = producer.createImage(text);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+
 		try {
 			ImageIO.write(image, "jpg", out);
 		} catch (IOException e) {
-			throw new AccountCaptchaException(""+captchaKey+"",e);
+			throw new AccountCaptchaException("" + captchaKey + "", e);
 		}
 		return out.toByteArray();
-		
+
 	}
 
 	public boolean validateCaptcha(String captchaKey, String captchaValue)
 			throws AccountCaptchaException {
-		String text=captchaMap.get(captchaKey);
-		if(text==null){
-			throw new AccountCaptchaException("Captcha key '"+captchaKey+"' not found!");
+		String text = captchaMap.get(captchaKey);
+		if (text == null) {
+			throw new AccountCaptchaException("Captcha key '" + captchaKey
+					+ "' not found!");
 		}
-		if(text.equals(captchaValue)){
+		if (text.equals(captchaValue)) {
 			captchaMap.remove(captchaKey);
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
-
 	private String getCaptchaText() {
-		if(preDefinedTexts!=null && !preDefinedTexts.isEmpty()){
-			String text=preDefinedTexts.get(textCount);
-			textCount=(textCount+1)%preDefinedTexts.size();
+		if (preDefinedTexts != null && !preDefinedTexts.isEmpty()) {
+			String text = preDefinedTexts.get(textCount);
+			textCount = (textCount + 1) % preDefinedTexts.size();
 			return text;
-		}else{
+		} else {
 			return producer.createText();
 		}
 	}
 
-	public List<String> getPreDefinedTexts() throws AccountCaptchaException{
+	public List<String> getPreDefinedTexts() throws AccountCaptchaException {
 		return preDefinedTexts;
 	}
 
-	public void setPreDefinedTexts(List<String> preDefinedTexts) throws AccountCaptchaException{
+	public void setPreDefinedTexts(List<String> preDefinedTexts)
+			throws AccountCaptchaException {
 		this.preDefinedTexts = preDefinedTexts;
-	}	
-	
+	}
+
 }

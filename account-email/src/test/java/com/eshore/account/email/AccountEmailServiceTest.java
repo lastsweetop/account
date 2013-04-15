@@ -15,34 +15,41 @@ import com.icegreen.greenmail.util.GreenMailUtil;
 import com.icegreen.greenmail.util.ServerSetupTest;
 
 public class AccountEmailServiceTest {
-	private GreenMail greenMail;
-	
+	private GreenMail	greenMail;
+
 	@BeforeClass
-	public void startMailServer(){
-		greenMail=new GreenMail(ServerSetupTest.SMTP);
+	public void startMailServer() {
+		greenMail = new GreenMail(ServerSetupTest.SMTP);
 		greenMail.setUser("test@eshore.com", "123456");
 		greenMail.start();
 	}
-	
+
 	@Test
-	public void testSendMail() throws Exception{
-		ApplicationContext ctx=new ClassPathXmlApplicationContext("account-email.xml");
-		AccountEmailService accountEmailService=(AccountEmailService)ctx.getBean("accountEmailService");
-		
-		String subject="Test Subject";
-		String htmlText="<h3>Test</h3>";
+	public void testSendMail() throws Exception {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"account-email.xml");
+		AccountEmailService accountEmailService = (AccountEmailService) ctx
+				.getBean("accountEmailService");
+
+		String subject = "Test Subject";
+		String htmlText = "<h3>Test</h3>";
 		accountEmailService.sendMail("test2@eshore.com", subject, htmlText);
-		
+
 		greenMail.waitForIncomingEmail(2000, 1);
-		
-		Message[] msgs=greenMail.getReceivedMessages();
-		assertEquals(1,msgs.length);
-		assertEquals(subject,msgs[0].getSubject());
-		assertEquals(htmlText,GreenMailUtil.getBody(msgs[0]).trim());
+
+		Message[] msgs = greenMail.getReceivedMessages();
+		assertEquals(1, msgs.length);
+		assertEquals(subject, msgs[0].getSubject());
+		assertEquals(htmlText, GreenMailUtil.getBody(msgs[0]).trim());
 	}
-	
+
+	/**
+	 * stopMailServer:(这里用一句话描述这个方法的作用). <br/>
+	 * @author wudongdong
+	 * @since JDK 1.6
+	 */
 	@AfterClass
-	public void stopMailServer(){
+	public void stopMailServer() {
 		greenMail.stop();
 	}
 }

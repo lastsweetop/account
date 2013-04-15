@@ -16,7 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AccountCaptchaServiceTest {
-	private AccountCaptchaService service;
+	private AccountCaptchaService	service;
 
 	@BeforeMethod
 	public void prepare() throws Exception {
@@ -45,33 +45,33 @@ public class AccountCaptchaServiceTest {
 		}
 		assertTrue(image.exists() && image.length() > 0);
 	}
-	
+
 	@Test
-	public void testValidateCaptchaCorrect() throws Exception{
-		List<String> preDefinedTexts=new ArrayList<String>();
+	public void testValidateCaptchaCorrect() throws Exception {
+		List<String> preDefinedTexts = new ArrayList<String>();
 		preDefinedTexts.add("12345");
 		preDefinedTexts.add("abcde");
 		service.setPreDefinedTexts(preDefinedTexts);
-		
-		String captchaKey=service.generateCaptchaKey();
+
+		String captchaKey = service.generateCaptchaKey();
 		service.generateCaptchaImage(captchaKey);
 		assertTrue(service.validateCaptcha(captchaKey, "12345"));
-		
-		captchaKey=service.generateCaptchaKey();
+
+		captchaKey = service.generateCaptchaKey();
 		service.generateCaptchaImage(captchaKey);
 		assertTrue(service.validateCaptcha(captchaKey, "abcde"));
-		
+
 	}
-	
+
 	@Test
-	public void testValidateCaptchaIncorrect() throws Exception{
-		List<String> preDefinedTexts=new ArrayList<String>();
+	public void testValidateCaptchaIncorrect() throws Exception {
+		List<String> preDefinedTexts = new ArrayList<String>();
 		preDefinedTexts.add("12345");
 		service.setPreDefinedTexts(preDefinedTexts);
-		
-		String captchaKey=service.generateCaptchaKey();
+
+		String captchaKey = service.generateCaptchaKey();
 		service.generateCaptchaImage(captchaKey);
 		assertFalse(service.validateCaptcha(captchaKey, "abcdf"));
-				
+
 	}
 }
