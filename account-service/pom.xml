@@ -9,6 +9,7 @@
 	</parent>
 	<artifactId>account-service</artifactId>
 	<name>account-service</name>
+	
 	<properties>
 		<greenmail.version>1.3.1b</greenmail.version>
 	</properties>
