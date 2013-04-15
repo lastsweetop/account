@@ -13,10 +13,10 @@ import com.eshore.account.persist.AccountPersistException;
 import com.eshore.account.persist.AccountPersistService;
 
 public class AccountServiceImpl implements AccountService {
-	private AccountPersistService accountPersistService;
-	private AccountEmailService accountEmailService;
-	private AccountCaptchaService accountCaptchaService;
-	private Map<String, String> activationMap = new HashMap<String, String>();
+	private AccountPersistService		accountPersistService;
+	private AccountEmailService			accountEmailService;
+	private AccountCaptchaService		accountCaptchaService;
+	private final Map<String, String>	activationMap	= new HashMap<String, String>();
 
 	public String generateCaptchaKey() throws AccountServiceException {
 		try {
@@ -95,24 +95,20 @@ public class AccountServiceImpl implements AccountService {
 	public void login(String id, String password)
 			throws AccountServiceException {
 		try {
-			Account account=accountPersistService.readAccount(id);
-			if(account==null){
+			Account account = accountPersistService.readAccount(id);
+			if (account == null) {
 				throw new AccountServiceException("Account does not exist.");
 			}
-			if(!account.isActivated()){
+			if (!account.isActivated()) {
 				throw new AccountServiceException("Account is disabled.");
 			}
-			if(!account.getPassword().equals(password)){
+			if (!account.getPassword().equals(password)) {
 				throw new AccountServiceException("Incorrect password");
 			}
 		} catch (AccountPersistException e) {
-			throw new AccountServiceException("Unable to log in.",e);
+			throw new AccountServiceException("Unable to log in.", e);
 		}
 	}
-
-	/**
-	 * getter/setter
-	 */
 
 	public AccountPersistService getAccountPersistService() {
 		return accountPersistService;

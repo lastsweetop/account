@@ -1,10 +1,9 @@
 package com.eshore.account.service;
 
-
 public class AccountServiceException extends Exception {
 
-	public AccountServiceException(String string,Exception e) {
-		super(string,e);
+	public AccountServiceException(String string, Exception e) {
+		super(string, e);
 	}
 
 	public AccountServiceException(String string) {
@@ -12,9 +11,8 @@ public class AccountServiceException extends Exception {
 	}
 
 	/**
-	 * 
+	 *
 	 */
-	private static final long serialVersionUID = 4396329970630444552L;
+	private static final long	serialVersionUID	= 4396329970630444552L;
 
-	
 }

@@ -45,8 +45,13 @@ public class SignUpRequest {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	/**
+	 * setPassword:(这里用一句话描述这个方法的作用). <br/>
+	 * @author wudongdong
+	 * @param newPassword String
+	 */
+	public final void setPassword(final String newPassword) {
+		this.password = newPassword;
 	}
 
 	public String getConfirmPassword() {
@@ -80,6 +85,6 @@ public class SignUpRequest {
 	public void setActivateServiceUrl(String activateServiceUrl) {
 		this.activateServiceUrl = activateServiceUrl;
 	}
-    
-    
+
+
 }
