@@ -179,6 +179,7 @@
 							<configuration>
 								<!-- 多模块聚合 -->
 								<aggregate>true</aggregate>
+
 							</configuration>
 						</plugin>
 						<plugin>
